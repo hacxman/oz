@@ -159,6 +159,47 @@
             </zeroOrMore>
           </element>
         </optional>
+        <optional>
+          <element name='storage'>
+            <zeroOrMore>
+              <element name='disk'>
+                <interleave>
+                  <attribute name='name'>
+                    <text/>
+                  </attribute>
+                  <attribute name='mode'>
+                    <text/>
+                  </attribute>
+                </interleave>
+                <interleave>
+                  <element name='mountpoint'>
+                    <text/>
+                  </element>
+                  <optional>
+                    <element name='device'>
+                      <text/>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name='filesystem'>
+                      <text/>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name='format'>
+                      <text/>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name='size'>
+                      <text/>
+                    </element>
+                  </optional>
+                </interleave>
+              </element>
+            </zeroOrMore>
+          </element>
+        </optional>
       </interleave>
     </element>
   </define>
