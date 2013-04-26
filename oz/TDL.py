@@ -246,6 +246,30 @@ class TDL(object):
             else:
                 raise oz.OzException.OzException("File type for %s must be 'raw' or 'base64'" % (name))
 
+        self.disks = {}
+        for disk in self.doc.xpathEval('/template/storage/disk'):
+            name = disk.prop('name')
+            if name is None:
+                raise oz.OzException.OzException("Disk without a name was given")
+
+            mtpoint = get_value(self.doc,
+                "/template/storage/disk[@name=\"%s\"]/mountpoint" % (name),
+                "storage disk '%s' mountpoint" % (name), optional=False)
+            dev     = get_value(self.doc,
+                "/template/storage/disk[@name=\"%s\"]/device" % (name),
+                "storage disk '%s' device" % (name), optional=False)
+            fsys    = get_value(self.doc,
+                "/template/storage/disk[@name=\"%s\"]/filesystem" % (name),
+                "storage disk '%s' filesystem" % (name), optional=False)
+            form    = get_value(self.doc,
+                "/template/storage/disk[@name=\"%s\"]/format" % (name),
+                "storage disk '%s' format" % (name), optional=False)
+            size    = int(get_value(self.doc,
+                "/template/storage/disk[@name=\"%s\"]/size" % (name),
+                "storage disk '%s' size in bytes" % (name), optional=False))
+
+            self.disks[name] = (mtpoint, dev, fsys, form, size)
+
     def merge_packages(self, packages):
         """
         Method to merge additional packages into an existing TDL.  The packages
