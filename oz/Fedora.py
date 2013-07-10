@@ -26,7 +26,8 @@ import oz.OzException
 
 class FedoraGuest(oz.RedHat.RedHatCDYumGuest):
     """
-    Class for Fedora 7, 8, 9, 10, 11, 12, 13, 14, 15, and 16 installation.
+    Class for Fedora 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+    and 19 installation.
     """
     # FIXME: For consistency most of the __init__ functions take self, tdl,
     # config, auto, output_disk (in that order).  However, in order to not break
@@ -93,7 +94,7 @@ def get_class(tdl, config, auto, output_disk=None):
     """
     Factory method for Fedora installs.
     """
-    if tdl.update in ["10", "11", "12", "13", "14", "15", "16"]:
+    if tdl.update in ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
         return FedoraGuest(tdl, config, auto, "virtio", True, "virtio", True,
                            output_disk)
     if tdl.update in ["7", "8", "9"]:
